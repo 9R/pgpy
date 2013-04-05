@@ -4,7 +4,7 @@
 {% block content %}
 <h1>{{ dirs[0]['dir'].replace('static','') }} </h1>
 <div id="directories">
-      <div class="preview">
+      <div>
 	<a href="javascript:history.go(-1);">back</a>
       </div>
       <br/>
@@ -15,7 +15,7 @@
     {% endfor %}
   </div>
   <div id="pics">
-    <ul id="items" class"pannels">
+    <ul id="items" class="pannels">
       {% set id = 1 %}
       {% for f in dirs[0]['files'] %}
       <li id={{ id }} class="item">
