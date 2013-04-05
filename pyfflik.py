@@ -54,14 +54,14 @@ def listing(directory=""):
 	    helpers.resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
 
       #remove thumb and web from subdir listing
-	try:
-	  d[1].remove('web')
-	except:
-	  pass
-	try:
-	  d[1].remove('thumbs')
-	except:
-	  pass
+      try:
+	d[1].remove('web')
+      except:
+	pass
+      try:
+	d[1].remove('thumbs')
+      except:
+	pass
 
       #empty list of subdirs
       subdirs = []
