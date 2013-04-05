@@ -19,9 +19,11 @@
       {% set id = 1 %}
       {% for f in dirs[0]['files'] %}
       <li id={{ id }} class="item">
+      <div class="thumb">
 	<a href="/{{ md + dirs[0]['dir']+f['name'] }}">
-   	<img src="/{{ md + dirs[0]['dir']+'thumbs/'+f['name'] }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
-        </a>
+	  <img src="/{{ md + dirs[0]['dir']+'thumbs/'+f['name'] }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
+	</a>
+      </div>
       </li>
       {% set id = id + 1 %}
       {% endfor %}
