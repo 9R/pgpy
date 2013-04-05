@@ -1,8 +1,6 @@
 
-
-
-#items {
-  display: table;
+.pannels {
+  display:block ;
   list-style: none;
   list-style-type: none;
   list-style-position: initial;
@@ -47,23 +45,14 @@
   overflow: hidden;
 }
 
-ul.pannels {
-  clear:both;
-  list-style-type:none;
-  margin:0;
-  padding:0;
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
 }
-
-ul.pannels li {
-  float:none;
-  height:auto;
-  margin:0;
-  padding:0;
-  position:relative;
-  display:block;
-  width:auto;
-}
-
 
 a {
   color: #0088cc;
@@ -76,12 +65,8 @@ a:focus {
   text-decoration: underline;
 }
 
-body {
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: #333333;
-  background-color: #ffffff;
+ul.pannels li {
+  position:relative;
+  display:block;
 }
 
