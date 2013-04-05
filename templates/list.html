@@ -2,16 +2,29 @@
 {% block title %} {{ dirs[0]['dir'] }} {% endblock %}
 
 {% block content %}
-<h1>{{ dirs[0]['dir'].replace('static','') }} </h1>
-<div id="directories">
-      <div>
-	<a href="javascript:history.go(-1);">back</a>
-      </div>
-      <br/>
+<div id="nav">
+  <a href="{{ url_for('static', filename= 'pics/' + dirs[0]['dir'] ) }}">{{ dirs[0]['dir'] }}</a>
+</div>
+<div id="main">
+
+  <div id="dirs">
+
+    <!--
+
+    <div>
+
+      <a href="javascript:history.go(-1);">back</a>
+    </div>
+    -->      
+    <br/>
+    {% set n = 1 %}
     {% for subdir in dirs[0]['subdirs']  %}
-      <div class="preview">
-	<a href="{{ dirs[0]['dir'] + subdir }}/">{{ subdir }}</a>
-      </div>
+    <div class="dir">
+      <a href="{{  subdir }}/" style="background-image: url({{ url_for( 'static' , filename=  'pics/' + dirs[0]['dir'] + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
+	<span>{{ subdir }} </span>
+      </a>
+    </div>
+    {% set n = n + 1 %}
     {% endfor %}
   </div>
   <div id="pics">
@@ -19,24 +32,24 @@
       {% set id = 1 %}
       {% for f in dirs[0]['files'] %}
       <li id={{ id }} class="item">
-        <h4>{{ f['name'][:-4] }}</h4>
-      	<div class="thumb">
-	  <a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}">
-	    <img src="{{ url_for( 'static' , filename = 'pics/' + dirs[0]['dir']+'thumbs/'+f['name'] ) }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
-          </a>
-	</div>
-	<div class="info">
-	  <a href="#{{ f['name'] }}">#</a>
-	  <a href="/{{ md + dirs[0]['dir']+f['name'] }}">image</a>
-	  <span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;{{ url_for('static', _external=True, filename =  dirs[0]['dir']) }}#{{ f['name']|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dirs[0]['dir']+'web/'+f['name'] ) }}&quot; alt=&quot;{{ f['name'][:-4]  }}&quot; title=&quot;{{ f['name'][:-4] }}&quot;&gt;&lt;/a&gt;"/>
-	  </span>
-	</div>
+      <h4>{{ f['name'][:-4] }}</h4>
+      <div class="thumb">
+	<a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}">
+	  <img src="{{ url_for( 'static' , filename = 'pics/' + dirs[0]['dir']+'thumbs/'+f['name'] ) }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
+	</a>
+      </div>
+      <div class="info">
+	<a href="#{{ f['name'] }}">#</a>
+	<a href="/{{ md + dirs[0]['dir']+f['name'] }}">image</a>
+	<span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;{{ url_for('static', _external=True, filename =  dirs[0]['dir']) }}#{{ f['name']|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dirs[0]['dir']+'web/'+f['name'] ) }}&quot; alt=&quot;{{ f['name'][:-4]  }}&quot; title=&quot;{{ f['name'][:-4] }}&quot;&gt;&lt;/a&gt;"/>
+	</span>
+      </div>
       </li>
       {% set id = id + 1 %}
       {% endfor %}
     </ul>
+    {{dirs}}
   </div>
-
-{{ dirs }}<br/>
+</div>
 {% endblock %}
 
