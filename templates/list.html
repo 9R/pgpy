@@ -21,14 +21,14 @@
       <li id={{ id }} class="item">
         <h4>{{ f['name'][:-4] }}</h4>
       	<div class="thumb">
-	  <a href="/{{ md + dirs[0]['dir']+'web/'+f['name'] }}">
-	    <img src="/{{ md + dirs[0]['dir']+'thumbs/'+f['name'] }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
+	  <a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}">
+	    <img src="{{ url_for( 'static' , filename = 'pics/' + dirs[0]['dir']+'thumbs/'+f['name'] ) }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
           </a>
 	</div>
 	<div class="info">
 	  <a href="#{{ f['name'] }}">#</a>
 	  <a href="/{{ md + dirs[0]['dir']+f['name'] }}">image</a>
-	  <span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;/{{ md + dirs[0]['dir'] }}#{{ f['name']|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dirs[0]['dir']+'web/'+f['name'] ) }}&quot; alt=&quot;{{ f['name'][:-4]  }}&quot; title=&quot;{{ f['name'][:-4] }}&quot;&gt;&lt;/a&gt;"/>
+	  <span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;{{ url_for('static', _external=True, filename =  dirs[0]['dir']) }}#{{ f['name']|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dirs[0]['dir']+'web/'+f['name'] ) }}&quot; alt=&quot;{{ f['name'][:-4]  }}&quot; title=&quot;{{ f['name'][:-4] }}&quot;&gt;&lt;/a&gt;"/>
 	  </span>
 	</div>
       </li>
