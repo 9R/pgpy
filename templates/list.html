@@ -5,8 +5,9 @@
 <h1>{{ dirs[0]['dir'].replace('static','') }} </h1>
 <div id="directories">
       <div class="preview">
-	<a href="/../">/../</a>
+	<a href="javascript:history.go(-1);">back</a>
       </div>
+      <br/>
     {% for subdir in dirs[0]['subdirs']  %}
       <div class="preview">
 	<a href={{ dirs[0]['dir'] + subdir }}>{{ subdir }}</a>
