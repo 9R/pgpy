@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %} {{ dirs[0]['dir'] }} {% endblock %}
+
+{% block content %}
+<h1>{{ dirs[0]['dir'].replace('static','') }} </h1>
+<div id="directories">
+      <div class="preview">
+	<a href="/../">/../</a>
+      </div>
+    {% for subdir in dirs[0]['subdirs']  %}
+      <div class="preview">
+	<a href={{ dirs[0]['dir'] + subdir }}>{{ subdir }}</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div id="pics">
+    <ul id="items" class"pannels">
+      {% set id = 1 %}
+      {% for f in dirs[0]['files'] %}
+      <li id={{ id }} class="item">
+	<a href="/{{ md + dirs[0]['dir']+f['name'] }}">
+   	<img src="/{{ md + dirs[0]['dir']+'thumbs/'+f['name'] }}" alt="{{ f['name'] }}" title="{{ f['name'].lower().strip('.jpg') }}" border="0"/>
+        </a>
+      </li>
+      {% set id = id + 1 %}
+      {% endfor %}
+    </ul>
+  </div>
+
+{{ dirs }}<br/>
+{% endblock %}
+
