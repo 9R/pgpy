@@ -31,7 +31,7 @@
     <ul id="items" class="pannels">
       {% set id = 1 %}
       {% for f in dirs[0]['files'] %}
-      <li id={{ id }} class="item">
+      <li id={{ f['name'] }} class="item">
       <h4>{{ f['name'][:-4] }}</h4>
       <div class="thumb">
 	<a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}">
