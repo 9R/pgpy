@@ -66,13 +66,21 @@
 
 
 .item {
+  padding : 0px 4px 0px 4px;
   float: left;
-  width: 280px;
-  height: 300px;
-  margin-right: 10px;
+  width: 260px;
+  height: 290px;
+  margin: 1px 0px 10px 0px;
   overflow: hidden;
   text-align: left;
   background ; #111 ;
+}
+
+.item:link,
+.item:focus,
+.item:hover,
+.item:active {
+  background-color: #fffccc;
 }
 
 .item h4 {
@@ -89,7 +97,7 @@
 .embed-code {
   height: 14px;
   padding: 2px;
-  width: 160px;
+  width: 140px;
   background-color: #eee ;
   border: 1px solid #777;
   color: #777;
@@ -102,8 +110,8 @@
 .thumb img {
   display: table-cell;
   vertical-align: middle;
-  width:300px;
-  max-height:240px;
+  width:260px;
+  max-height:230px;
   overflow: hidden;
 }
 
