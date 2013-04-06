@@ -41,7 +41,9 @@ def listing(directory=""):
 
       #save stats for every file in dict
       for f in d[2]:
-        if f.lower().endswith(".jpg") :
+	suffix = f.lower()[-3:]
+	LOG.info(suffix)
+        if  suffix in config.py['supported_file']:
 	  f = f.encode("utf-8")
   	  files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) })
 	  
