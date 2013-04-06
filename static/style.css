@@ -2,14 +2,20 @@
 #nav {
   clear: both;
   display: block;
+  padding: 40px 20px 10px 20px ;
+}
+
+#nav a{
+  font-weight: bold ;
+  font-size: 40px ; 
 }
 
 #main {
-  padding: 0px 40px 40px 40px ;
+  padding: 0px 20px 40px 20px ;
 }
 
 .pannels {
-  padding: 40px 0px 0px 0px ;
+  padding: 10px 0px 0px 0px ;
   display:block ;
   list-style: none;
   list-style-type: none;
@@ -19,7 +25,7 @@
 }
 
 #dirs {
-  padding: 30px 0px 0px 0px ;
+  padding: 10px 0px 0px 0px ;
   min-height: 25px;
 }
 
@@ -30,7 +36,7 @@
   padding:0;
   margin: 0;
   max-width: 120px;
-  max-height: 120px;
+  max-height: 80px;
   margin-right: 10px;
   overflow: hidden;
 }
@@ -61,7 +67,7 @@
 
 .item {
   float: left;
-  width: 300px;
+  width: 280px;
   height: 300px;
   margin-right: 10px;
   overflow: hidden;
@@ -83,7 +89,7 @@
 .embed-code {
   height: 14px;
   padding: 2px;
-  width: 180px;
+  width: 160px;
   background-color: #eee ;
   border: 1px solid #777;
   color: #777;
@@ -96,8 +102,8 @@
 .thumb img {
   display: table-cell;
   vertical-align: middle;
-  max-height: 240px ;
-  max-width:300px;
+  width:300px;
+  max-height:240px;
   overflow: hidden;
 }
 
