@@ -20,7 +20,7 @@
     {% set n = 1 %}
     {% for subdir in dirs[0]['subdirs']  %}
     <div class="dir">
-      <a href="{{ dirs[0]['dir'] + subdir }}/" style="background-image: url({{ url_for( 'static' , filename=  'pics/' + dirs[0]['dir'] + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
+      <a href="/{{ dirs[0]['dir'] + subdir }}/" style="background-image: url({{ url_for( 'static' , filename=  'pics/' + dirs[0]['dir'] + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
 	<span>{{ subdir }} </span>
       </a>
     </div>
@@ -51,10 +51,10 @@
 </div>
 {% endblock %}
 {% block footer %}
-<!--
+
 <div id="footer" style="clear:both;">
   {{ dirs }}
 </div>
--->
+
 {% endblock%}
 
