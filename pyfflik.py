@@ -78,7 +78,7 @@ def listing(directory=""):
       dirs.append({'dir': path.replace(config.py['mediadir'], '') , 'subdirs':subdirs , 'files': files })
 
   #render site
-  return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs)
+  return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=config.py['sitename'])
 
 
 

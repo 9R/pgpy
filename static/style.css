@@ -1,17 +1,30 @@
 
 #nav {
-  clear: both;
+  clear: left;
   display: block;
   padding: 40px 20px 10px 20px ;
 }
 
 #nav a{
   font-weight: bold ;
-  font-size: 40px ; 
+  font-size: 35px ; 
 }
 
 #main {
   padding: 0px 20px 40px 20px ;
+}
+
+#back {
+  float:right ; 
+}
+
+.title {
+  float: left ;
+  padding: 10px 20px 0px 20px ;
+  font-weight: bolder ;
+  font-size: 50px ;
+  line-height: 60px ;
+
 }
 
 .pannels {
@@ -55,6 +68,7 @@
 .dir a:hover,
 .dir a:focus {
   text-decoration: none; 
+  background-color: #fffccc;
 }
 
 .dir span {

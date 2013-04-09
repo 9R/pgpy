@@ -1,25 +1,34 @@
 {% extends "layout.html" %}
-{% block title %} {{ dirs[0]['dir'] }} {% endblock %}
+{% block title %}{{ sitename }}: {{ dirs[0]['dir'] }}{% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
 <link href="{{url_for('static', filename='lightbox.css')}}" rel="stylesheet" />
 {% endblock %}
+
 {% block content %}
+
+<div id="head">
+  <div class="title">
+    <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
+  </div>
+</div>
+
 <div id="nav">
-  <a href="{{ url_for('static', filename= 'pics/' + dirs[0]['dir'] ) }}">{{ dirs[0]['dir'] }}</a>
+  {% set l = '' %}
+  {%for d in dirs[0]['dir'].split('/') %}
+  {%if d != '' %}
+  {% set l = l + d + '/' %}
+  <a href="/{{ l }}">{{ d }}/</a>
+  {%endif%}
+  {%endfor%}
+</div>
+<div id="back">
+  <a href="javascript:history.go(-1);">back</a>
 </div>
 <div id="main">
 
   <div id="dirs">
-
-
-
-    <div>
-
-      <a href="javascript:history.go(-1);">back</a>
-    </div>
-
     <br/>
     {% set n = 1 %}
     {% for subdir in dirs[0]['subdirs']  %}
@@ -31,6 +40,7 @@
     {% set n = n + 1 %}
     {% endfor %}
   </div>
+
   <div id="pics">
     <ul id="items" class="pannels">
       {% for f in dirs[0]['files'] %}
