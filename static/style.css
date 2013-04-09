@@ -1,13 +1,12 @@
-
 #nav {
-  clear: left;
   display: block;
+  clear: left;
   padding: 40px 20px 10px 20px ;
 }
 
 #nav a{
   font-weight: bold ;
-  font-size: 35px ; 
+  font-size: 30px ; 
 }
 
 #main {
@@ -15,7 +14,13 @@
 }
 
 #back {
-  float:right ; 
+  float:left ; 
+  padding: 0px 20px 0px 20px ;
+}
+
+#error {
+  clear: both ;
+  padding: 10px 20px 0px 20px ;
 }
 
 .title {
@@ -28,13 +33,13 @@
 }
 
 .pannels {
-  padding: 10px 0px 0px 0px ;
   display:block ;
-  list-style: none;
-  list-style-type: none;
-  list-style-position: initial;
-  list-style-image: initial;
   clear: both;
+  padding: 10px 0px 0px 0px ;
+  list-style: none;
+  list-style-position: initial;
+  list-style-type: none;
+  list-style-image: initial;
 }
 
 #dirs {
@@ -44,48 +49,48 @@
 
 .dir {
   float: left;
-  margin-right: 10px;
   overflow: hidden;
-  padding:0;
+  overflow: hidden;
   margin: 0;
+  margin-right: 10px;
+  margin-right: 10px;
+  padding:0;
   max-width: 120px;
   max-height: 80px;
-  margin-right: 10px;
-  overflow: hidden;
 }
 
 .dir a {
   position: relative ;
-  background-size: 100%;
+  display: block;
+  padding-top: 20px ;
   width: 100px;
   height: 80px;
-  display: block;
+  background-size: 100%;
   text-align: center;
   text-decoration : none ;
-  padding-top: 20px ;
 }
 
 .dir a:hover,
-.dir a:focus {
-  text-decoration: none; 
+.dir a:focus { 
   background-color: #fffccc;
+  text-decoration: none;
 }
 
 .dir span {
-  font-size: 20px; 
-  font-weight: bold ;
-  background-color : white ;
   padding: 2px 4px ;
+  background-color : white ; 
+  font-weight: bold ;
+  font-size: 20px;
 }
 
 
 .item {
-  padding : 0px 4px 0px 4px;
   float: left;
+  overflow: hidden;
+  margin: 1px 0px 10px 0px;
+  padding : 0px 4px 0px 4px;
   width: 260px;
   height: 290px;
-  margin: 1px 0px 10px 0px;
-  overflow: hidden;
   text-align: left;
   background ; #111 ;
 }
@@ -102,18 +107,18 @@
 }
 
 .info {
-  margin: 2px
+  margin: 2px;
 }
 .embed {
   float: right;
 }
 
 .embed-code {
-  height: 14px;
   padding: 2px;
   width: 140px;
-  background-color: #eee ;
+  height: 14px;
   border: 1px solid #777;
+  background-color: #eee ;
   color: #777;
 }
 
@@ -123,19 +128,19 @@
 
 .thumb img {
   display: table-cell;
-  vertical-align: middle;
-  width:260px;
-  max-height:230px;
   overflow: hidden;
+  max-height:230px;
+  width:260px;
+  vertical-align: middle;
 }
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  color: #333333;
   background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 20px;
 }
 
 a {
@@ -152,5 +157,6 @@ a:focus {
 ul.pannels li {
   position:relative;
   display:block;
+}
 }
 
