@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block title %} {{ dirs[0]['dir'] }} {% endblock %}
-
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+<link href="{{url_for('static', filename='lightbox.css')}}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
 <div id="nav">
   <a href="{{ url_for('static', filename= 'pics/' + dirs[0]['dir'] ) }}">{{ dirs[0]['dir'] }}</a>
@@ -9,13 +13,13 @@
 
   <div id="dirs">
 
-    
+
 
     <div>
 
       <a href="javascript:history.go(-1);">back</a>
     </div>
-          
+
     <br/>
     {% set n = 1 %}
     {% for subdir in dirs[0]['subdirs']  %}
@@ -33,7 +37,7 @@
       <li id={{ f['name'] }} class="item">
       <h4>{{ f['name'][:-4] }}</h4>
       <div class="thumb">
-	<a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}" target="new">
+	<a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}" rel="lightbox[{{ dirs[0]['dir'] }}]">
 	  <img src="{{ url_for( 'static' , filename = 'pics/' + dirs[0]['dir']+'thumbs/'+f['name'] ) }}" alt="{{ f['name'] }}" title="{{ f['name'].lower()[:-4] }}" border="0"/>
 	</a>
       </div>
@@ -51,10 +55,10 @@
 </div>
 {% endblock %}
 {% block footer %}
-
+<!--
 <div id="footer" style="clear:both;">
   {{ dirs }}
 </div>
-
+-->
 {% endblock%}
 

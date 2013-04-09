@@ -4,6 +4,8 @@
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title> {% block title %} {% endblock %} </title>
+    {% block scripts %} {% endblock %}
+   
     {% endblock %}
   </head>
   <body>
