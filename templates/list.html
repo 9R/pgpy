@@ -15,11 +15,13 @@
 </div>
 
 <div id="nav">
+  <a href="/">root</a>
   {% set l = '' %}
   {%for d in dirs[0]['dir'].split('/') %}
   {%if d != '' %}
   {% set l = l + d + '/' %}
-  <a href="/{{ l }}">{{ d }}/</a>
+  /
+  <a href="/{{ l }}">{{ d }}</a>
   {%endif%}
   {%endfor%}
 </div>
