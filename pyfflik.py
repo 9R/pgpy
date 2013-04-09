@@ -13,14 +13,17 @@ LOG = logging.getLogger(__name__)
 @app.route('/')
 @app.route('/<path:directory>')
 def listing(directory=""):
-  files=[]
+
+  if not os.path.isdir( config.py['mediadir'] ):
+    return render_template('error.html', message='The media directory was not found at "' + config.py['mediadir'] + '". Please check permissions and your configuration.')
+
   dirs=[]
   #construct path
   p = config.py['mediadir']+directory
-  #handle trailng slash 
+  #handle trailng slash
   if not p.endswith('/'):
     p = p + '/'
-  
+
   for d in os.walk(p) :
 
     path=d[0].encode('utf-8')
