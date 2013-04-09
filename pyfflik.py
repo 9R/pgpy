@@ -16,10 +16,10 @@ def listing(directory=""):
 
   #check if dirs are valid
   if not os.path.isdir( config.py['mediadir'] ):
-    return render_template('error.html', message='The media directory was not found at "' + config.py['mediadir'] + '". Please check permissions and your configuration.')
+    return render_template('error.html', message='The media directory was not found at "' + config.py['mediadir'] + '". Please check permissions and your configuration.', sitename=config.py['sitename'])
 
   if not os.path.isdir( config.py['mediadir'] + directory ):
-    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.')
+    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=config.py['sitename'])
 
   dirs=[]
   #construct path
