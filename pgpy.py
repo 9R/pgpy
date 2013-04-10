@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, escape, jsonify
 import os
 import time
-import helpers
+import libpgpy
 import logging
 
 import config
@@ -42,7 +42,7 @@ def listing(directory=""):
       for sub in ['thumbs', 'web']:
         if not os.path.isdir(path+sub):
 	  os.mkdir(path+sub)
-      
+
       #create empty file list for current dir
       files = []
 
@@ -53,14 +53,14 @@ def listing(directory=""):
         if  suffix in config.py['supported_file']:
 	  f = f.encode("utf-8")
   	  files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) })
-	  
+
 	  #create thumbs if necessary
 	  if not os.path.isfile(path+'thumbs/'+f):
-	    helpers.resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
+	    libpgpy.resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
 
 	  #create websize if necessary
 	  if not os.path.isfile(path+'web/'+f):
-	    helpers.resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
+            libpgpy.resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
 
       #remove thumb and web from subdir listing
       try:
