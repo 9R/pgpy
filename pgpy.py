@@ -21,65 +21,15 @@ def listing(directory=""):
   if not os.path.isdir( config.py['mediadir'] + directory ):
     return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=config.py['sitename'])
 
-  dirs=[]
+#  dirs=[]
   #construct path
   p = config.py['mediadir']+directory
   #handle trailng slash
   if not p.endswith('/'):
     p = p + '/'
-
-  for d in os.walk(p) :
-
-    path=d[0].encode('utf-8')
-
-    #ignore thumb and web sub-dirs
-    if not (path.endswith('thumbs') or path.endswith('web') ):
-
-      if not path.endswith('/'):
-        path = path + '/'
-
-      #create thumb and web sub-dirs if needed
-      for sub in ['thumbs', 'web']:
-        if not os.path.isdir(path+sub):
-	  os.mkdir(path+sub)
-
-      #create empty file list for current dir
-      files = []
-
-      #save stats for every file in dict
-      for f in d[2]:
-	suffix = f.lower()[-3:]
-	LOG.info(suffix)
-        if  suffix in config.py['supported_file']:
-	  f = f.encode("utf-8")
-  	  files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) })
-
-	  #create thumbs if necessary
-	  if not os.path.isfile(path+'thumbs/'+f):
-	    libpgpy.resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
-
-	  #create websize if necessary
-	  if not os.path.isfile(path+'web/'+f):
-            libpgpy.resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
-
-      #remove thumb and web from subdir listing
-      try:
-	d[1].remove('web')
-      except:
-	pass
-      try:
-	d[1].remove('thumbs')
-      except:
-	pass
-
-      #empty list of subdirs
-      subdirs = []
-      
-      for subdir in d[1]:
-	subdirs.append(subdir.replace(config.py['mediadir'], ''))
-
-      #save dir stats in dict
-      dirs.append({'dir': path.replace(config.py['mediadir'], '') , 'subdirs':subdirs , 'files': files })
+  
+  #scan dir for files and subdirs
+  dirs = libpgpy.scanDir(p)
 
   #render site
   return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=config.py['sitename'])
