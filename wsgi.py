@@ -2,8 +2,8 @@ import sys, logging, os
 
 logging.basicConfig(stream=sys.stderr)
 
-os.chdir('/var/www/pyfflik')
-sys.path.insert(0, '/var/www/pyfflik')
+os.chdir('/var/www/pgpy')
+sys.path.insert(0, '/var/www/pgpy')
 
-from pyfflik import app
+from pgpy import app
 application = app
