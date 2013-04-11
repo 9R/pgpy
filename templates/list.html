@@ -3,7 +3,10 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
-<link href="{{url_for('static', filename='lightbox.css')}}" rel="stylesheet" />
+<script src="{{ url_for( 'static' , filename='js/flowplayer.min.js' ) }}"></script>
+<link href="{{url_for('static', filename='css/lightbox.css')}}" rel="stylesheet" type="stylesheet"/>
+<!--<link href="http://releases.flowplayer.org/5.3.2/skin/minimalist.css" rel="stylesheet" type="text/css" />-->
+<link href="{{ url_for('static', filename='css/minimalist.css') }}" rel="stylesheet" type="text/css" /> 
 {% endblock %}
 
 {% block content %}
@@ -34,8 +37,9 @@
 
 <div id="nav">
   <a href="/">root</a>
+  {% set dir ,  subdirs , files = dirs[0]['dir'] , dirs[0]['subdirs'] , dirs[0]['files'] %}
   {% set l = '' %}
-  {%for d in dirs[0]['dir'].split('/') %}
+  {%for d in dir.split('/') %}
   {%if d != '' %}
   {% set l = l + d + '/' %}
   /
@@ -51,9 +55,9 @@
   <div id="dirs">
     <br/>
     {% set n = 1 %}
-    {% for subdir in dirs[0]['subdirs']  %}
+    {% for subdir in subdirs  %}
     <div class="dir">
-      <a href="/{{ dirs[0]['dir'] + subdir }}/" style="background-image: url({{ url_for( 'static' , filename=  'pics/' + dirs[0]['dir'] + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
+      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'pics/' + dir + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
 	<span>{{ subdir }} </span>
       </a>
     </div>
@@ -63,20 +67,36 @@
 
   <div id="pics">
     <ul id="items" class="pannels">
-      {% for f in dirs[0]['files'] %}
-      <li id={{ f['name'] }} class="item">
-      <h4>{{ f['name'][:-4] }}</h4>
+      {% for f in files %}
+
+      {% set type , name = f['type'] , f['name'] %}
+
+      <li id={{ name }} class="item">
+      <h4>{{ name[:-4] }}</h4>
+      {%if type == 'img'%}
       <div class="thumb">
-	<a href="{{ url_for( 'static', filename = 'pics/' + dirs[0]['dir']+'web/'+f['name']) }}" rel="lightbox[{{ dirs[0]['dir'] }}]">
-	  <img src="{{ url_for( 'static' , filename = 'pics/' + dirs[0]['dir']+'thumbs/'+f['name'] ) }}" alt="{{ f['name'] }}" title="{{ f['name'].lower()[:-4] }}" border="0"/>
+	<a href="{{ url_for( 'static', filename = 'pics/' + dir +'web/'+ name ) }}" rel="lightbox[{{ dir }}]">
+	  <img src="{{ url_for( 'static' , filename = 'pics/' + dir +'thumbs/'+ name ) }}" alt="{{ name }}" title="{{ name.lower()[:-4] }}" border="0"/>
 	</a>
       </div>
-      <div class="info">
-	<a href="#{{ f['name'] }}">#</a>
-	<a href="/{{ md + dirs[0]['dir']+f['name'] }}" target="new">image</a>
-	<span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;{{ url_for('static', _external=True, filename =  dirs[0]['dir']) }}#{{ f['name']|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dirs[0]['dir']+'web/'+f['name'] ) }}&quot; alt=&quot;{{ f['name'][:-4]  }}&quot; title=&quot;{{ f['name'][:-4] }}&quot;&gt;&lt;/a&gt;"/>
-	</span>
+      {% elif type == 'vid' %}
+      <div class="flowplayer color-light">
+	<video>
+	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'pics/' + dir + name ) }}" > 
+	</video>
       </div>
+      {% endif %}
+      <div class="info">
+	<a href="#{{ name }}">#</a>
+	{% if type == 'img' %}
+	<a href="/{{ md + dir + name }}" target="new">image</a>
+	<span class="embed">embed: <input class="embed-code" onClick="this.select()" value="&lt;a href=&quot;{{ url_for('static', _external=True, filename = dir ) }}#{{ name|e }}&quot;&gt;&lt;img src=&quot;{{ url_for('static' , _external=True , filename = dir +'web/'+ name ) }}&quot; alt=&quot;{{ name[:-4]  }}&quot; title=&quot;{{ name[:-4] }}&quot;&gt;&lt;/a&gt;"/>
+	</span>
+	{% elif type == 'vid' %}
+	<a href="/{{ md + dir + name }}" target="new">video</a>
+
+	bla
+	{% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -85,10 +105,7 @@
 </div>
 {% endblock %}
 {% block footer %}
-<!--
 <div id="footer" style="clear:both;">
-  {{ dirs }}
 </div>
--->
 {% endblock%}
 

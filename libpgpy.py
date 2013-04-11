@@ -79,15 +79,22 @@ def scanDir (path):
         suffix = f.lower()[-3:]
         if  suffix in config.py['supported_files']:
           f = f.encode("utf-8")
-          files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) })
 
-          #create thumbs if necessary
-          if not os.path.isfile(path+'thumbs/'+f):
-            resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
+	  if suffix in config.py['supported_images']:
+	    ftype = "img"
 
-          #create websize if necessary
-          if not os.path.isfile(path+'web/'+f):
-            resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
+	    #create thumbs if necessary
+	    if not os.path.isfile(path+'thumbs/'+f):
+	      resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
+	      
+	    #create websize if necessary
+	    if not os.path.isfile(path+'web/'+f):
+	      resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
+
+	  elif suffix in config.py['supported_videos']:
+	    ftype = "vid"
+
+	  files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) , 'type': ftype })
 
       #remove thumb and web from subdir listing
       try:

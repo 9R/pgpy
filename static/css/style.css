@@ -145,6 +145,10 @@
   color: #777;
 }
 
+.flowplayer {
+  height : 230px; 
+}
+
 .thumb{
   background: black ;
 }
