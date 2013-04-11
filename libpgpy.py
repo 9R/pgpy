@@ -25,11 +25,13 @@ def get_users(userfile):
   load users from file
   '''
   users = {}
+  n = 1
   with open(userfile) as f:
-    lines = f.readlines()
-    for line in lines:
-      u = line.strip('\n').split(' ')
-      users[int(u[2])] = User(u[0], int(u[2]), u[1])
+    for line in f.readlines():
+      if line != '\n' and not line.startswith('#'):
+        u = line.strip('\n').split(' ')
+        users[n] = User(u[0], n, u[1])
+	n =+ 1
   return users
 
 ##### image resizing ######
@@ -75,7 +77,7 @@ def scanDir (path):
       #save stats for every file in dict
       for f in d[2]:
         suffix = f.lower()[-3:]
-        if  suffix in config.py['supported_file']:
+        if  suffix in config.py['supported_files']:
           f = f.encode("utf-8")
           files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) })
 
