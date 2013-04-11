@@ -12,6 +12,29 @@
   <div class="title">
     <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
   </div>
+  {% if not current_user.is_authenticated() %}
+  <div id="login">
+    <h4>Login</h4>
+    <form action="/login" method="post">
+      <dl>
+	<dd><input type="hidden" name="next" value="{{ dirs[0]['dir'] }}"/></dd>
+	<dt>Username:</dt>
+	<dd><input type="text" name="username" /></dd>
+	<dt>Password:</dt>
+	<dd><input type="password"name="password" /></dd>
+	<dt>Remember:</dt>
+	<dd><input type="checkbox" name="remember"></dd>
+	<dd><input type="submit" value="Login" /></dd>
+      </dl>
+    </form>
+  </div>
+  {% endif %}
+  {%if current_user.is_authenticated() %}
+  <div>
+    <a href="/logout">Logout</a>
+    
+  </div>
+  {%endif%}
 </div>
 
 <div id="nav">
