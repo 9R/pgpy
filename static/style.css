@@ -4,6 +4,29 @@
   padding: 40px 20px 10px 20px ;
 }
 
+.login {
+  float: right;
+  padding: 10px 100px 10px 10px ;
+}
+
+.login input {
+  padding: 2px;
+  margin:1px; 
+  width: 140px;
+  height: 14px;
+  border: 1px solid #777;
+  background-color: #eee ;
+  color: #777;
+
+}
+
+.hidden_button {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+
 #nav a{
   font-weight: bold ;
   font-size: 30px ; 
