@@ -1,0 +1,8 @@
+#User Authdata:
+# Create users by adding username and a password hash separated by a " "
+# One user per line
+# To add a usera to this file exexute
+#   python adduser.py
+# and follow the instructions.
+
+jharvard sha1$EBAMAaJN$a2392b9b6b98a88ff08989caa8a6dd45f49e57ba
