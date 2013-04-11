@@ -10,28 +10,9 @@ import logging
 
 import config
 
-class User(UserMixin):
-    def __init__(self, name, id, pwhash , active=True):
-        self.name = name
-        self.id = id
-        self.active = active
-	self.pwhash = pwhash
-
-    def is_active(self):
-        return self.active
-
-
-class Anonymous(AnonymousUser):
-    name = u"Anonymous"
-
-
-USERS = {
-    1: User(u"kili", 1, "sha1$lBorSPTr$4a8d66c90c5c509e5ceab0eb407ab8fa4f7269c0"),
-    2: User(u"bla", 2, "sha1$sE3sTGtF$90fed9ced31d96f8a5466be50c53fb40f93f5f33"),
-}
+USERS = libpgpy.get_users('users.txt')
 
 USER_AUTH = dict((u.name, u) for u in USERS.itervalues())
-
 
 app = Flask(__name__)
 
@@ -42,7 +23,7 @@ app.config.from_object(__name__)
 
 login_manager = LoginManager()
 
-login_manager.anonymous_user= Anonymous
+login_manager.anonymous_user= libpgpy.Anonymous
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log"
 login_manager.refresh_view = "reauth"
@@ -55,11 +36,15 @@ login_manager.setup_app(app)
 LOG = logging.getLogger(__name__)
 
 
+LOG.error(USERS[1].name)
+
 @app.route('/login', methods=["POST","GET"])
 def login():
   if request.method == "POST" and "username" in request.form:
     username = request.form["username"]
     password = request.form["password"]
+    if username not in USER_AUTH:
+      return redirect(request.form.get("next") ) 
     if check_password_hash( USER_AUTH[username].pwhash, password ):
       remember = request.form.get("remember", "no") == "yes"
       if login_user(USER_AUTH[username], remember=remember):
@@ -70,6 +55,7 @@ def login():
     else:
       flash(u"Invalid username.")
   return redirect(request.form.get("next") ) 
+
 
 @app.route('/logout')
 def logout():

@@ -2,6 +2,37 @@ import Image
 import ImageOps
 import config
 import os
+from flask.ext.login import (LoginManager, current_user, login_required,
+    login_user, logout_user, UserMixin, AnonymousUser,
+    confirm_login, fresh_login_required)
+
+class User(UserMixin):
+    def __init__(self, name, id, pwhash , active=True):
+        self.name = name
+        self.id = id
+        self.active = active
+        self.pwhash = pwhash
+
+    def is_active(self):
+        return self.active
+
+
+class Anonymous(AnonymousUser):
+    name = u"Anonymous"
+
+def get_users(userfile):
+  '''
+  load users from file
+  '''
+  users = {}
+  with open(userfile) as f:
+    lines = f.readlines()
+    for line in lines:
+      u = line.strip('\n').split(' ')
+      users[int(u[2])] = User(u[0], int(u[2]), u[1])
+  return users
+
+##### image resizing ######
 
 def resizePic(  pic, res ):
   i = Image.open(pic)
@@ -10,6 +41,9 @@ def resizePic(  pic, res ):
 def resizePic2( pic, res ):
   i = Image.open(pic)
   return ImageOps.fit(i, res )
+
+
+##### directory scanner ######
 
 def scanDir (path):
   """
