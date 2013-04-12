@@ -93,9 +93,6 @@ def upload():
           flash("The upload was not allowed")
       else:
 	return render_template('error.html', message='Illegal filename or path. Please try again.', sitename=sitename)
-  	
-  
-      return render_template('upload.html', sitename=sitename)
 
   elif request.method == 'GET':
     subs=libpgpy.scanDir(config.py['mediadir'])[0]['subdirs']
