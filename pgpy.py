@@ -1,9 +1,6 @@
-from flask import (Flask, render_template, url_for, escape, jsonify, flash, request,
-    		  redirect)
-from flask.ext.uploads import UploadSet, IMAGES 
-from flask.ext.login import (LoginManager, current_user, login_required,                             
-                            login_user, logout_user, UserMixin, AnonymousUser,
-			    confirm_login, fresh_login_required)
+from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect
+from flask.ext.uploads import UploadSet, IMAGES, TestingFileStorage, configure_uploads
+from flask.ext.login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin, AnonymousUser, confirm_login, fresh_login_required
 from werkzeug import check_password_hash
 import os
 import libpgpy
@@ -11,39 +8,46 @@ import logging
 
 import config
 
+#### defaults
+
 LOG = logging.getLogger(__name__)
 
 USERS = libpgpy.get_users('users.txt')
-
 USER_AUTH = dict((u.name, u) for u in USERS.itervalues())
 
-UPLOADS_DEFAULT_DEST = 'static/pics/'
-
-app = Flask(__name__)
-
-sitename = config.py['sitename']
 SECRET_KEY = config.py['secret']
 DEBUG = True
 
+UPLOADS_DEFAULT_DEST = 'static/'
+
+sitename = config.py['sitename']
+
+#### application
+
+app = Flask(__name__)
 app.config.from_object(__name__)
 
-login_manager = LoginManager()
+#### login
 
+login_manager = LoginManager()
 login_manager.anonymous_user= libpgpy.Anonymous
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log"
 login_manager.refresh_view = "reauth"
+login_manager.setup_app(app)
 
+#### uploads
 
+media = UploadSet('media', IMAGES + ('mp4',) )
+configure_uploads(app, media )
+
+#### utils
 
 @login_manager.user_loader
 def load_user(id):
   return USERS.get(int(id))
 
-login_manager.setup_app(app)
-
-media = UploadSet('media', IMAGES + ('mp4',) )
-
+#### views
 
 @app.route('/login', methods=["POST","GET"])
 def login():
@@ -69,19 +73,23 @@ def logout():
   logout_user()
   return redirect("/")
 
+
 @app.route('/upload', methods=["GET", "POST"])
 @login_required
 def upload():
+  
   if request.method == 'POST' and 'media' in request.files:
+    folder = None
+    print os.path.abspath(os.curdir)
     if 'folder' in request.form:
       subfolder = request.form['folder']
     fdata=[]
     for f in request.files.getlist('media'):
-      LOG.error(f.filename)
       try:
-	filename = media.save(f, '')
-      except:
-	LOG.error(f.filename)
+        filename = media.save(f, subfolder)
+      except UploadNotAllowed:
+        flash("The upload was not allowed")
+	
 
     return render_template('upload.html', sitename=sitename)
 

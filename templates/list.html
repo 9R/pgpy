@@ -29,8 +29,8 @@
   {% endif %}
   {%if current_user.is_authenticated() %}
   <div id="logout" class="login">
-    <a href="/logout">Logout</a>
-    
+    <a href="/logout">Logout</a><br/>
+    <a href="/upload">Upload</a>
   </div>
   {%endif%}
 </div>
@@ -57,7 +57,7 @@
     {% set n = 1 %}
     {% for subdir in subdirs  %}
     <div class="dir">
-      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'pics/' + dir + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
+      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'media/' + dir + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
 	<span>{{ subdir }} </span>
       </a>
     </div>
@@ -75,14 +75,14 @@
       <h4>{{ name[:-4] }}</h4>
       {%if type == 'img'%}
       <div class="thumb">
-	<a href="{{ url_for( 'static', filename = 'pics/' + dir +'web/'+ name ) }}" rel="lightbox[{{ dir }}]">
-	  <img src="{{ url_for( 'static' , filename = 'pics/' + dir +'thumbs/'+ name ) }}" alt="{{ name }}" title="{{ name.lower()[:-4] }}" border="0"/>
+	<a href="{{ url_for( 'static', filename = 'media/' + dir +'web/'+ name ) }}" rel="lightbox[{{ dir }}]">
+	  <img src="{{ url_for( 'static' , filename = 'media/' + dir +'thumbs/'+ name ) }}" alt="{{ name }}" title="{{ name.lower()[:-4] }}" border="0"/>
 	</a>
       </div>
       {% elif type == 'vid' %}
       <div class="flowplayer color-light">
 	<video>
-	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'pics/' + dir + name ) }}" > 
+	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'media/' + dir + name ) }}" > 
 	</video>
       </div>
       {% endif %}
@@ -106,6 +106,7 @@
 {% endblock %}
 {% block footer %}
 <div id="footer" style="clear:both;">
+  {{dirs}}
 </div>
 {% endblock%}
 

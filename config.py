@@ -1,7 +1,7 @@
 py={}
 
 py['sitename'] = "pgpy"
-py['mediadir'] = 'static/pics/'
+py['mediadir'] = 'static/media/'
 py['webres'] =  1024
 py['thumbres'] = 300
 py['supported_images'] = ['jpg', 'png', 'bmp']
