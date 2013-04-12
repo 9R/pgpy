@@ -1,5 +1,6 @@
 from flask import (Flask, render_template, url_for, escape, jsonify, flash, request,
     		  redirect)
+from flask.ext.uploads import UploadSet, IMAGES 
 from flask.ext.login import (LoginManager, current_user, login_required,                             
                             login_user, logout_user, UserMixin, AnonymousUser,
 			    confirm_login, fresh_login_required)
@@ -10,12 +11,17 @@ import logging
 
 import config
 
+LOG = logging.getLogger(__name__)
+
 USERS = libpgpy.get_users('users.txt')
 
 USER_AUTH = dict((u.name, u) for u in USERS.itervalues())
 
+UPLOADS_DEFAULT_DEST = 'static/pics/'
+
 app = Flask(__name__)
 
+sitename = config.py['sitename']
 SECRET_KEY = config.py['secret']
 DEBUG = True
 
@@ -28,15 +34,16 @@ login_manager.login_view = "login"
 login_manager.login_message = u"Please log"
 login_manager.refresh_view = "reauth"
 
+
+
 @login_manager.user_loader
 def load_user(id):
   return USERS.get(int(id))
 
 login_manager.setup_app(app)
-LOG = logging.getLogger(__name__)
 
+media = UploadSet('media', IMAGES + ('mp4',) )
 
-LOG.error(USERS[1].name)
 
 @app.route('/login', methods=["POST","GET"])
 def login():
@@ -62,6 +69,25 @@ def logout():
   logout_user()
   return redirect("/")
 
+@app.route('/upload', methods=["GET", "POST"])
+@login_required
+def upload():
+  if request.method == 'POST' and 'media' in request.files:
+    if 'folder' in request.form:
+      subfolder = request.form['folder']
+    fdata=[]
+    for f in request.files.getlist('media'):
+      LOG.error(f.filename)
+      try:
+	filename = media.save(f, '')
+      except:
+	LOG.error(f.filename)
+
+    return render_template('upload.html', sitename=sitename)
+
+  elif request.method == 'GET':
+    return render_template('upload.html', sitename=sitename)
+
 
 @app.route('/')
 @app.route('/<path:directory>', methods=["GET","POST"])
@@ -72,7 +98,7 @@ def listing(directory=""):
     return render_template('error.html', message='The media directory was not found at "' + config.py['mediadir'] + '". Please check permissions and your configuration.', sitename=config.py['sitename'])
 
   if not os.path.isdir( config.py['mediadir'] + directory ):
-    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=config.py['sitename'])
+    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=sitename)
 
   #construct path
   p = config.py['mediadir']+directory
@@ -84,7 +110,7 @@ def listing(directory=""):
   dirs = libpgpy.scanDir(p)
 
   #render site
-  return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=config.py['sitename'])
+  return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=sitename)
 
 @app.route('/favicon.ico')
 def favicon():

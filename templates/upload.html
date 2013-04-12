@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}{{ sitename }}: Upload{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+<div id="head">
+  <div class="title">
+    <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
+  </div>
+  <div id="login">
+    <h4>Upload</h4>
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+      <dl>
+	<dt>Select files:</dt>
+	<dd><input type="file" multiple name="media" /></dd>
+	<dd><input type="submit" value="Upload"/><dd>
+      </dl>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+<!--
+<div id="footer" style="clear:both;">
+  {{ dirs }}
+</div>
+-->
+{% endblock%}
+
