@@ -116,3 +116,10 @@ def scanDir (path):
       dirs.append({'dir': path.replace(config.py['mediadir'], '') , 'subdirs':subdirs , 'files': files })
 
   return dirs
+
+##### upload path validation #######
+def isValidMediaPath(path):
+  if not path.startswith(config.py['mediadir']):
+    return False
+  else:
+    return True

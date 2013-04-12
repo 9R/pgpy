@@ -1,25 +1,39 @@
 {% extends "layout.html" %}
 {% block title %}{{ sitename }}: Upload{% endblock %}
 {% block scripts %}
+
+<script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for( 'static' , filename='js/pgpy.js') }} "></script>
 {% endblock %}
-
 {% block content %}
-
 <div id="head">
   <div class="title">
     <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
   </div>
-  <div id="login">
+  <div id="upload">
     <h4>Upload</h4>
-    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="form-upload">
       <dl>
 	<dt>Select files:</dt>
 	<dd><input type="file" multiple name="media" /></dd>
-	<dd><input type="text" name="folder" placeholder="Folder"/></dd>
-	<dd><input type="submit" value="Upload"/><dd>
+	<dd>
+	<select name="folder" id="folder">
+	  <option disabled="yes" selected="yes">Select folder</option>
+	  <option value="">/</option>
+	  {% for sub in subs %}
+	  <option value="{{sub}}">/{{ sub }} </option>
+	  {% endfor %}
+	  <option value="other">Specify custom folder</option>
+	</select>
+	</dd>
+	<dd><input type="text" id="custom_folder" name="folder" placeholder="Folder" autocomplete="off"/></dd>
+	<dd><input type="submit" id="subsubmit" value="Upload"/><dd>
       </dl>
     </form>
   </div>
+</div>
+<div id="back">
+  <a href="/">back</a>
 </div>
 {% endblock %}
 {% block footer %}

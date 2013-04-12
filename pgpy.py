@@ -77,24 +77,34 @@ def logout():
 @app.route('/upload', methods=["GET", "POST"])
 @login_required
 def upload():
-  
   if request.method == 'POST' and 'media' in request.files:
     folder = None
-    print os.path.abspath(os.curdir)
     if 'folder' in request.form:
       subfolder = request.form['folder']
-    fdata=[]
     for f in request.files.getlist('media'):
-      try:
-        filename = media.save(f, subfolder)
-      except UploadNotAllowed:
-        flash("The upload was not allowed")
-	
-
-    return render_template('upload.html', sitename=sitename)
+      #prevent dir traversal
+      savepath = os.path.relpath(os.path.abspath(os.path.join(os.path.curdir,config.py['mediadir'],subfolder, f.filename)))
+      if libpgpy.isValidMediaPath(savepath):
+	#save file
+	try:
+          filename = media.save(f, subfolder)
+	  return redirect(subfolder)
+        except UploadNotAllowed:
+          flash("The upload was not allowed")
+      else:
+	return render_template('error.html', message='Illegal filename or path. Please try again.', sitename=sitename)
+  	
+  
+      return render_template('upload.html', sitename=sitename)
 
   elif request.method == 'GET':
-    return render_template('upload.html', sitename=sitename)
+    subs=libpgpy.scanDir(config.py['mediadir'])[0]['subdirs']
+    return render_template('upload.html', sitename=sitename,subs=subs)
+
+
+@app.route('/get_subs', methods=['POST','GET'])
+def getsubs():
+  return jsonify( subs=libpgpy.scanDir(config.py['mediadir'])[0]['subdirs'])
 
 
 @app.route('/')
