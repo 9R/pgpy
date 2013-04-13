@@ -6,10 +6,6 @@
 <script type="text/javascript" src="{{ url_for( 'static' , filename='js/pgpy.js') }} "></script>
 {% endblock %}
 {% block content %}
-<div id="head">
-  <div class="title">
-    <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
-  </div>
   <div id="upload">
     <h4>Upload</h4>
     <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="form-upload">
