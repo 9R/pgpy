@@ -2,13 +2,20 @@
 <html>
   <head>
     {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title> {% block title %} {% endblock %} </title>
     {% block scripts %} {% endblock %}
     {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
   </head>
   <body>
-    <div id="content"> {% block content %} {% endblock %}</div>
+    <div id="content">
+
+      <div id="head">
+	<div class="title">
+	  <a href="/" style="color:#0088cc;">{{sitename[:-1]}}</a><a href="/" style="color:#FF0080;" >{{sitename[-1:]}}</a>
+	</div>
+      </div>
+      {% block content %}  {% endblock %}</div>
 
     <div id="footer">
       {% block footer %}

@@ -1,137 +1,133 @@
-#nav {
-  display: block;
-  clear: left;
-  padding: 40px 20px 10px 20px ;
+body{
+  padding : 0 100px 0 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+#head {
+  height : 40px;
+  padding : 0 0 20px 0;
+}
+
+.title {
+  font-size: 55px;
+  font-weight: bold;
 }
 
 .login {
   float: right;
-  padding: 10px 100px 10px 10px ;
 }
 
 .login input {
   padding: 2px;
-  margin:1px; 
+  margin:1px;
   width: 140px;
   height: 14px;
-  border: 1px solid #777;
-  background-color: #eee ;
-  color: #777;
-
 }
 
-.hidden_button {
+.login .checkbox {
+  width: 20px;
+  float: right;
+}
+
+.hidden_button{
   position: absolute;
   left: -9999px;
   width: 1px;
   height: 1px;
 }
 
-#nav a{
+#nav { 
+  display: block; 
+  clear: left; 
+  padding: 15px 20px 10px 20px ; 
+} 
+  
+#nav a{                                                                                                  
   font-weight: bold ;
-  font-size: 30px ; 
+  font-size: 30px ;
+}
+
+#back a{                                                                                                  
+  font-weight: bold ;
+  font-size: 15px ;
 }
 
 #main {
-  padding: 0px 20px 40px 20px ;
+  padding: 15px 20px 10px 20px ;
 }
 
-#back {
-  float:left ; 
-  padding: 0px 20px 0px 20px ;
-}
-
-#error {
-  clear: both ;
-  padding: 10px 20px 0px 20px ;
-}
-
-.title {
-  float: left ;
-  padding: 10px 20px 0px 20px ;
-  font-weight: bolder ;
-  font-size: 50px ;
-  line-height: 60px ;
-
-}
-
-.pannels {
-  display:block ;
-  clear: both;
-  padding: 10px 0px 0px 0px ;
-  list-style: none;
-  list-style-position: initial;
-  list-style-type: none;
-  list-style-image: initial;
-}
-
-#dirs {
-  padding: 10px 0px 0px 0px ;
-  min-height: 25px;
-}
-
-.dir {
-  float: left;
-  overflow: hidden;
-  overflow: hidden;
-  margin: 0;
-  margin-right: 10px;
-  margin-right: 10px;
-  padding:0;
-  max-width: 120px;
-  max-height: 80px;
-}
-
-.dir a {
-  position: relative ;
-  display: block;
-  padding-top: 20px ;
-  width: 100px;
-  height: 80px;
+.dir a{
+  margin: 0 4px 4px 0;
+  width:130px;
+  height:80px;
+  padding: 3px;
   background-size: 100%;
+  float: left;
+  padding-top: 30px;
   text-align: center;
-  text-decoration : none ;
-}
-
-.dir a:hover,
-.dir a:focus { 
-  background-color: #fffccc;
   text-decoration: none;
+  display: block;
+  overflow: hidden;
 }
 
 .dir span {
   padding: 2px 4px ;
   background-color : white ; 
   font-weight: bold ;
-  font-size: 20px;
+  font-size: 20px;                                                                                       
 }
 
+#pics {
+  clear: both;
+  height: 40px ;
+}
+
+#pics ul {
+  padding: 0px;
+  margin: 0px;
+
+}
+
+#items {
+  clear:both ;
+  list-style: none ;
+}
 
 .item {
-  float: left;
-  overflow: hidden;
-  margin: 1px 0px 10px 0px;
-  padding : 0px 4px 0px 4px;
+  margin: 0 8px  8px 0;
+  padding-bottom: 12px;
   width: 260px;
-  height: 290px;
+  height: 260px;
+  float:left;
+  overflow:hidden;
   text-align: left;
-  background ; #111 ;
-}
-
-.item:link,
-.item:focus,
-.item:hover,
-.item:active {
-  background-color: #fffccc;
 }
 
 .item h4 {
   margin: 3px;
 }
 
-.info {
-  margin: 2px;
+.thumb{
+  text-align:center;
+  background: #E1EDF2 ;
 }
+
+.thumb img{
+  margin: 0 0 -3px 0;
+  overflow: hidden;
+  height: 210px;
+}
+
+.flowplayer {
+  height: 204px;
+  background-color: #E1EdF2;
+}
+
+.info {
+  margin: 2px ;
+}
+
 .embed {
   float: right;
 }
@@ -140,50 +136,15 @@
   padding: 2px;
   width: 140px;
   height: 14px;
-  border: 1px solid #777;
-  background-color: #eee ;
-  color: #777;
-}
-
-.flowplayer {
-  height : 230px; 
-}
-
-.thumb{
-  background: black ;
-}
-
-.thumb img {
-  display: table-cell;
-  overflow: hidden;
-  max-height:230px;
-  width:260px;
-  vertical-align: middle;
-}
-
-body {
-  margin: 0;
-  background-color: #ffffff;
-  color: #333333;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 20px;
 }
 
 a {
   color: #0088cc;
   text-decoration: none;
-}
+  }
 
-a:hover,
-a:focus {
-  color: #005580;
-  text-decoration: underline;
+input {
+  border: 1px solid #999;
+  background-color: #eee ;
+  color: #777;
 }
-
-ul.pannels li {
-  position:relative;
-  display:block;
-}
-}
-
