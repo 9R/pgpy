@@ -51,9 +51,8 @@
     {% set n = 1 %}
     {% for subdir in subdirs  %}
     <div class="dir">
-      {% set background = dirs[dir+subdir+'/']['files'][0]['name'] %}
-      {% if background[-3:] == 'mp4'%} {% set background = background + '.png' %} {%endif%}
-      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'media/' + dir + subdir + '/thumbs/'  + background ) }});">
+
+      <a href="/{{ dir + subdir }}/" style="background-image: url( {{ url_for( 'static', filename=dirs[ dir+subdir+'/']['dirthumb']) }} );">
 	<span>{{ subdir }} </span>
       </a>
     </div>
@@ -101,7 +100,6 @@
 {% endblock %}
 {% block footer %}
 <div id="footer" style="clear:both;">
-  {{dirs}}
 </div>
 {% endblock%}
 

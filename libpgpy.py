@@ -120,8 +120,14 @@ def scanDir (path):
       for subdir in d[1]:
         subdirs.append(subdir.replace(config.py['mediadir'], ''))
 
+      # handle dir without files
+      if len(files) == 0:
+	dirthumb = 'img/fallback.jpg'
+      else:
+	dirthumb = path[7:] + 'thumbs/' + files[0]['name']
+
       #save dir stats in dict
-      dirs[path.replace(config.py['mediadir'], '')]  ={ 'subdirs':subdirs , 'files': files }
+      dirs[path.replace(config.py['mediadir'], '')]  ={ 'subdirs':subdirs , 'files': files ,'dirthumb' : dirthumb }
 
   return dirs
 
