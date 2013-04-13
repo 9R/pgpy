@@ -56,7 +56,7 @@ def scanDir (path):
   example for these dicts:
   {'files':[{'name': 'filename.jpg', 'date': mtime }, 'subdirs':[], 'dir':'']}
   """
-  dirs =[]
+  dirs ={}
   for d in os.walk(path) :
 
     path=d[0].encode('utf-8')
@@ -114,7 +114,7 @@ def scanDir (path):
         subdirs.append(subdir.replace(config.py['mediadir'], ''))
 
       #save dir stats in dict
-      dirs.append({'dir': path.replace(config.py['mediadir'], '') , 'subdirs':subdirs , 'files': files })
+      dirs[path.replace(config.py['mediadir'], '')]  ={ 'subdirs':subdirs , 'files': files }
 
   return dirs
 
@@ -124,9 +124,7 @@ def scanDir (path):
 def getSubdirs():
   subs = []
   dirs = scanDir(config.py['mediadir'])
-  for d in dirs:
-    subs.append(d['dir'])
-  return subs
+  return dirs.keys()
 
 
 
