@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect
+from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect, abort
 from flask.ext.uploads import UploadSet, IMAGES, TestingFileStorage, configure_uploads
 from flask.ext.login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin, AnonymousUser, confirm_login, fresh_login_required
 from werkzeug import check_password_hash
@@ -114,7 +114,9 @@ def listing(directory=""):
     return render_template('error.html', message='The media directory was not found at "' + config.py['mediadir'] + '". Please check permissions and your configuration.', sitename=config.py['sitename'])
 
   if not os.path.isdir( config.py['mediadir'] + directory ):
-    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=sitename)
+    abort(404)
+ 
+#    return render_template('error.html', message='Invalid directory: "/' + directory + '". Please verify the submitted URL.' , sitename=sitename)
 
   #construct path
   p = config.py['mediadir']+directory
@@ -128,6 +130,20 @@ def listing(directory=""):
   #render site
   return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=sitename)
 
+from flask import render_template
+
+@app.errorhandler(404)
+def page_not_found(e):
+  return render_template('error.html', message="404. Monkeys have stolen this page.", sitename=sitename), 404
+
+@app.errorhandler(403)
+def page_not_found(e):
+  return render_template('error.html', message="403. Access forbidden.", sitename=sitename), 403
+
+@app.errorhandler(500)
+def page_not_found(e):
+  return render_template('error.html', message="500. Internal error.", sitename=sitename), 500
+
 @app.route('/favicon.ico')
 def favicon():
   return url_for('static', filename='favicon.ico')
@@ -136,7 +152,6 @@ def favicon():
 @app.route('/<path>.jpg')
 def picserv(path):
   return url_for('static', filename="/"+ path +".jpg")
-
 
 if __name__ == '__main__':
   app.debug=True
