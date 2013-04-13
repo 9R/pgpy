@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}{{ sitename }}: {{ dirs[0]['dir'] }}{% endblock %}
+{% set dir ,  subdirs , files = dirs.keys()[0] , dirs[dirs.keys()[0]]['subdirs'] , dirs[dirs.keys()[0]]['files'] %}
+{% block title %}{{ sitename }}: {{ dir }}{% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
@@ -36,7 +37,6 @@
 
 <div id="nav">
   <a href="/">root</a>
-  {% set dir ,  subdirs , files = dirs[0]['dir'] , dirs[0]['subdirs'] , dirs[0]['files'] %}
   {% set l = '' %}
   {%for d in dir.split('/') %}
   {%if d != '' %}
@@ -56,7 +56,9 @@
     {% set n = 1 %}
     {% for subdir in subdirs  %}
     <div class="dir">
-      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'media/' + dir + subdir + '/thumbs/'  + dirs[n]['files'][0]['name'] ) }});">
+      {% set background = dirs[dir+subdir+'/']['files'][0]['name'] %}
+      {% if background[-3:] == 'mp4'%} {% set background = background + '.png' %} {%endif%}
+      <a href="/{{ dir + subdir }}/" style="background-image: url({{ url_for( 'static' , filename= 'media/' + dir + subdir + '/thumbs/'  + background ) }});">
 	<span>{{ subdir }} </span>
       </a>
     </div>

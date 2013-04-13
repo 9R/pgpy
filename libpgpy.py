@@ -2,6 +2,8 @@ import Image
 import ImageOps
 import config
 import os
+import subprocess
+import shlex
 from flask.ext.login import (LoginManager, current_user, login_required,
     login_user, logout_user, UserMixin, AnonymousUser,
     confirm_login, fresh_login_required)
@@ -94,6 +96,11 @@ def scanDir (path):
 
 	  elif suffix in config.py['supported_videos']:
 	    ftype = "vid"
+
+	    #create video thumbnail
+	    if not os.path.isfile(path+'thumbs/'+f+'.png'):
+	      command = 'ffmpeg -y -i ' + path + f + ' -vframes 1 -ss 2 ' + path + 'thumbs/' +f + '.png'
+	      proc = subprocess.Popen(shlex.split(command))
 
 	  files.append({'name': f , 'mtime': os.path.getmtime(path+'/'+f) , 'type': ftype })
 
