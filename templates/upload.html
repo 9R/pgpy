@@ -18,12 +18,12 @@
 	<dd><input type="file" multiple name="media" /></dd>
 	<dd>
 	<select name="folder" id="folder">
-	  <option disabled="yes" selected="yes">Select folder</option>
-	  <option value="">/</option>
+	  {%set first = 1 %}
 	  {% for sub in subs %}
-	  <option value="{{sub}}">/{{ sub }} </option>
+	  <option value="{{sub}}" {%if first == 1%} selected="yes" {%endif%} >/{{ sub }}</option>
+	  {% set first = 0 %}
 	  {% endfor %}
-	  <option value="other">Specify custom folder</option>
+	  <option value="other">Add a new folder:</option>
 	</select>
 	</dd>
 	<dd><input type="text" id="custom_folder" name="folder" placeholder="Folder" autocomplete="off"/></dd>

@@ -20,6 +20,9 @@ class User(UserMixin):
 class Anonymous(AnonymousUser):
     name = u"Anonymous"
 
+
+##### create user objects ######
+
 def get_users(userfile):
   '''
   load users from file
@@ -33,6 +36,7 @@ def get_users(userfile):
         users[n] = User(u[0], n, u[1])
 	n =+ 1
   return users
+
 
 ##### image resizing ######
 
@@ -113,6 +117,18 @@ def scanDir (path):
       dirs.append({'dir': path.replace(config.py['mediadir'], '') , 'subdirs':subdirs , 'files': files })
 
   return dirs
+
+
+
+##### get all mediadir subdirs #######
+def getSubdirs():
+  subs = []
+  dirs = scanDir(config.py['mediadir'])
+  for d in dirs:
+    subs.append(d['dir'])
+  return subs
+
+
 
 ##### upload path validation #######
 def isValidMediaPath(path):
