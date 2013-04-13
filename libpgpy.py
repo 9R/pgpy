@@ -36,13 +36,10 @@ def get_users(userfile):
 
 ##### image resizing ######
 
-def resizePic(  pic, res ):
+def resizePic( pic, res,):
   i = Image.open(pic)
-  return i.resize(res, Image.NEAREST)
-
-def resizePic2( pic, res ):
-  i = Image.open(pic)
-  return ImageOps.fit(i, res )
+  i.thumbnail(res, Image.ANTIALIAS)
+  return i
 
 
 ##### directory scanner ######
@@ -85,11 +82,11 @@ def scanDir (path):
 
 	    #create thumbs if necessary
 	    if not os.path.isfile(path+'thumbs/'+f):
-	      resizePic2( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
+	      resizePic( path + f, (config.py['thumbres'], config.py['thumbres'])).save(path + 'thumbs/' + f)
 	      
 	    #create websize if necessary
 	    if not os.path.isfile(path+'web/'+f):
-	      resizePic2( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
+	      resizePic( path + f, (config.py['webres'], config.py['webres'])).save(path + 'web/' + f)
 
 	  elif suffix in config.py['supported_videos']:
 	    ftype = "vid"

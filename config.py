@@ -2,7 +2,7 @@ py={}
 
 py['sitename'] = "pgpy"
 py['mediadir'] = 'static/media/'
-py['webres'] =  1024
+py['webres'] =  800
 py['thumbres'] = 300
 py['supported_images'] = ['jpg', 'png', 'bmp']
 py['supported_videos'] = ['mp4']
