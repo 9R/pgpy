@@ -124,7 +124,11 @@ def scanDir (path):
       if len(files) == 0:
 	dirthumb = 'img/fallback.jpg'
       else:
-	dirthumb = path[7:] + 'thumbs/' + files[0]['name']
+	if files[0]['name'][-3:] == 'mp4':
+	  dt = files[0]['name']+'.png'
+	else:
+	  dt = files[0]['name']
+	dirthumb = path[7:] + 'thumbs/' + dt
 
       #save dir stats in dict
       dirs[path.replace(config.py['mediadir'], '')]  ={ 'subdirs':subdirs , 'files': files ,'dirthumb' : dirthumb }
