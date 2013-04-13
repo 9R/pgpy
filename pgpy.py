@@ -88,11 +88,11 @@ def upload():
 	#save file
 	try:
           filename = media.save(f, subfolder)
-	  return redirect(subfolder)
         except UploadNotAllowed:
           flash("The upload was not allowed")
       else:
 	return render_template('error.html', message='Illegal filename or path. Please try again.', sitename=sitename)
+    return redirect(subfolder)
 
   elif request.method == 'GET':
     subs=libpgpy.getSubdirs()
