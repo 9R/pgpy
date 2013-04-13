@@ -11,18 +11,14 @@
 
 {% block content %}
 
-<div id="head">
-  <div class="title">
-    <font color="#0667C3" >{{sitename[:-1]}}</font><font color="#FF0080" >{{sitename[-1:]}}</font>
-  </div>
   {% if not current_user.is_authenticated() %}
   <div id="login">
     <form action="/login" method="post" class="login">
       <dl>
-	<dd><input type="hidden" name="next" value="{{ dirs[0]['dir'] }}"/></dd>
+	<dd><input type="hidden" name="next" value="{{ dir }}"/></dd>
 	<dd><input type="text" name="username" placeholder="Username" /></dd>
 	<dd><input type="password"name="password" placeholder="Password" /></dd>
-	<dd>Remember:<input type="checkbox" name="remember"/> <input type="submit" class="hidden_button"/>
+	<dd>Remember:<input type="checkbox" class=checkbox name="remember"/> <input type="submit" class="hidden_button"/>
       </dl>
     </form>
   </div>
@@ -45,14 +41,13 @@
   <a href="/{{ l }}">{{ d }}</a>
   {%endif%}
   {%endfor%}
-</div>
-<div id="back">
+  <div id="back">  
   <a href="javascript:history.go(-1);">back</a>
+  </div>
 </div>
 <div id="main">
 
   <div id="dirs">
-    <br/>
     {% set n = 1 %}
     {% for subdir in subdirs  %}
     <div class="dir">
@@ -81,7 +76,7 @@
 	</a>
       </div>
       {% elif type == 'vid' %}
-      <div class="flowplayer color-light">
+      <div class="flowplayer functional no-background color-light" data-engine="flash" >
 	<video>
 	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'media/' + dir + name ) }}" > 
 	</video>
@@ -95,9 +90,8 @@
 	</span>
 	{% elif type == 'vid' %}
 	<a href="/{{ md + dir + name }}" target="new">video</a>
-
-	bla
 	{% endif %}
+      </div>
       </li>
       {% endfor %}
     </ul>
