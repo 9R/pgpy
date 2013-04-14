@@ -179,6 +179,18 @@ body{
   margin: 0 280px;
 }
 
+#license {
+  float:left;
+  padding: 3px 20px 3px 20px ; 
+  color: #A8B1B5 ;
+}
+
+#about  {
+  float:right;
+  padding: 3px 20px 3px 20px ; 
+  color: #A8B1B5 ;
+}
+
 a {
   color: #0088cc;
   text-decoration: none;
