@@ -13,14 +13,13 @@ This dictionary is then used to populate the site template.
 
 Additionally pgpy generates thumbnails and medium sized copies for all supported images formats and stores them in the "thumbs/" and "web/" subfolder respectively. It also generates download links and html code to to help using the media on another websites like a blog via c*p.
 
-pgpy was modelled on ffff.at's fuckflickr (http://ffff.at/fuckflickr) but I onlu used the general concept (simple layout, no database) as inspiration and did not consult their php code.
+pgpy was modelled on ffff.at's fuckflickr (http://ffff.at/fuckflickr) but I onlu used the general concept (simple layout, no database) as inspiration.
 
 
 ## Dependencies
     python-flask >= 0.8
     python-imaging
     
- pip 
   
     Flask-Login
     Flask-Uploads
