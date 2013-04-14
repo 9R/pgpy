@@ -9,7 +9,7 @@ import logging
 import config
 
 # uncomment for debugging
-#DEBUG = True
+DEBUG = True
 
 #### defaults
 
@@ -22,7 +22,7 @@ SECRET_KEY = config.py['secret']
 
 UPLOADS_DEFAULT_DEST = 'static/'
 
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
 sitename = config.py['sitename']
 

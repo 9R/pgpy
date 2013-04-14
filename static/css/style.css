@@ -63,12 +63,10 @@ body{
   float: left;
   overflow: hidden;
   margin: 0 4px 4px 0;
-  padding: 3px;
+  padding: 0px;
   padding-top: 30px;
   width:130px;
-  height:80px;
-  border: 6px solid transparent;
-  background-position: -3px -3px;
+  height:60px;
   background-size: 100%;
   text-align: center;
   text-decoration: none;
@@ -78,7 +76,7 @@ body{
   padding: 2px 4px ;
   background-color : white ; 
   font-weight: bold ;
-  font-size: 20px;                                                                                       
+  font-size: 14px;                                                                                       
 }
 
 #pics {

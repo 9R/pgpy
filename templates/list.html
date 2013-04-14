@@ -72,7 +72,7 @@
 	</a>
       </div>
       {% elif type == 'vid' %}
-      <div class="flowplayer functional no-background color-light">
+      <div class="flowplayer functional no-background color-light" data-engine="flash">
 	<video>
 	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'media/' + dir + name ) }}" > 
 	</video>
