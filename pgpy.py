@@ -8,6 +8,9 @@ import logging
 
 import config
 
+# uncomment for debugging
+#DEBUG = True
+
 #### defaults
 
 LOG = logging.getLogger(__name__)
@@ -16,9 +19,10 @@ USERS = libpgpy.get_users('users.txt')
 USER_AUTH = dict((u.name, u) for u in USERS.itervalues())
 
 SECRET_KEY = config.py['secret']
-DEBUG = True
 
 UPLOADS_DEFAULT_DEST = 'static/'
+
+SESSION_COOKIE_SECURE = True
 
 sitename = config.py['sitename']
 
