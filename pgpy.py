@@ -1,10 +1,11 @@
-from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect, abort
+from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect, abort, g
 from flask.ext.uploads import UploadSet, IMAGES, TestingFileStorage, configure_uploads
 from flask.ext.login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin, AnonymousUser, confirm_login, fresh_login_required
 from werkzeug import check_password_hash
 import os
 import libpgpy
 import logging
+import time
 
 import config
 
@@ -22,6 +23,7 @@ SECRET_KEY = config.py['secret']
 
 UPLOADS_DEFAULT_DEST = 'static/'
 
+#DEBUG=True
 #SESSION_COOKIE_SECURE = True
 
 sitename = config.py['sitename']
@@ -52,6 +54,19 @@ def load_user(id):
   return USERS.get(int(id))
 
 #### views
+
+@app.after_request
+def after_request(response):
+  diff = time.time() - g.start
+  print "Exec time: %s" % str(diff)
+  if (response.response):
+      response.response[0] = response.response[0].replace('__EXECUTION_TIME__', str(diff))
+  g.rtime = diff
+  return response
+
+@app.before_request
+def before_request():
+  g.start = time.time()
 
 @app.route('/login', methods=["POST","GET"])
 def login():
@@ -130,11 +145,10 @@ def listing(directory=""):
   
   #scan dir for files and subdirs
   dirs = libpgpy.scanDir(p)
-
+  
   #render site
   return render_template('list.html' , md=config.py['mediadir'] , dirs=dirs, sitename=sitename)
 
-from flask import render_template
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -147,6 +161,8 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
   return render_template('error.html', message="500. Internal error.", sitename=sitename), 500
+
+
 
 @app.route('/favicon.ico')
 def favicon():
