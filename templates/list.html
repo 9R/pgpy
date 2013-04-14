@@ -41,9 +41,6 @@
   <a href="/{{ l }}">{{ d }}</a>
   {%endif%}
   {%endfor%}
-  <div id="back">  
-  <a href="javascript:history.go(-1);">back</a>
-  </div>
 </div>
 <div id="main">
 
@@ -75,7 +72,7 @@
 	</a>
       </div>
       {% elif type == 'vid' %}
-      <div class="flowplayer functional no-background color-light" data-engine="flash" >
+      <div class="flowplayer functional no-background color-light">
 	<video>
 	  <source type="video/{{ name[-3:] }}" src="{{ url_for('static' , filename = 'media/' + dir + name ) }}" > 
 	</video>

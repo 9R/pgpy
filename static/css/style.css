@@ -1,33 +1,34 @@
 body{
   padding : 0 100px 0 20px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #head {
-  height : 40px;
   padding : 0 0 20px 0;
+  height : 40px;
 }
 
 .title {
-  font-size: 55px;
   font-weight: bold;
+  font-size: 55px;
 }
 
 .login {
   float: right;
+  font-weight: bold;
 }
 
 .login input {
-  padding: 2px;
   margin:1px;
+  padding: 2px;
   width: 140px;
   height: 14px;
 }
 
 .login .checkbox {
-  width: 20px;
   float: right;
+  width: 20px;
 }
 
 .hidden_button{
@@ -58,17 +59,19 @@ body{
 }
 
 .dir a{
+  display: block;
+  float: left;
+  overflow: hidden;
   margin: 0 4px 4px 0;
+  padding: 3px;
+  padding-top: 30px;
   width:130px;
   height:80px;
-  padding: 3px;
+  border: 6px solid transparent;
+  background-position: -3px -3px;
   background-size: 100%;
-  float: left;
-  padding-top: 30px;
   text-align: center;
   text-decoration: none;
-  display: block;
-  overflow: hidden;
 }
 
 .dir span {
@@ -84,8 +87,8 @@ body{
 }
 
 #pics ul {
-  padding: 0px;
   margin: 0px;
+  padding: 0px;
 
 }
 
@@ -95,12 +98,12 @@ body{
 }
 
 .item {
-  margin: 0 8px  8px 0;
+  float:left;
+  overflow:hidden;
+  margin: 0px 6px  6px 0px;
   padding-bottom: 12px;
   width: 260px;
   height: 260px;
-  float:left;
-  overflow:hidden;
   text-align: left;
 }
 
@@ -109,19 +112,29 @@ body{
 }
 
 .thumb{
-  text-align:center;
   background: #E1EDF2 ;
+  text-align:center;
+}
+
+.thumb:hover,
+.thumb:focus {
+  background-color:  #A8B1B5 ;
 }
 
 .thumb img{
-  margin: 0 0 -3px 0;
   overflow: hidden;
+  margin: 0 0 -3px 0;
   height: 210px;
 }
 
 .flowplayer {
-  height: 204px;
+  height: 210px;
   background-color: #E1EdF2;
+}
+
+.flowplayer:hover,
+.flowplayer:focus {
+  background-color: #A8B1B5 ;
 }
 
 .info {
@@ -138,10 +151,45 @@ body{
   height: 14px;
 }
 
+#error {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#upload {
+  padding: 0 15px;
+
+}
+
+#upload dd {
+  margin: 0;
+}
+
+#subsubmit {
+  margin: 0 200px;
+  width:100px;
+}
+
+#upload select,
+#upload #custom_folder,
+#upload #file {
+  width: 300px;
+}
+
+#back {
+  margin: 0 280px;
+}
+
 a {
   color: #0088cc;
   text-decoration: none;
   }
+
+a:hover,
+a:focus {
+  color: #002233 ;
+}
 
 input {
   border: 1px solid #999;

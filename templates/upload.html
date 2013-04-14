@@ -10,8 +10,8 @@
     <h4>Upload</h4>
     <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" id="form-upload">
       <dl>
-	<dt>Select files:</dt>
-	<dd><input type="file" multiple name="media" /></dd>
+	<dt></dt>
+	<dd><input id="file" type="file" multiple name="media" /></dd>
 	<dd>
 	<select name="folder" id="folder">
 	  {%set first = 1 %}
