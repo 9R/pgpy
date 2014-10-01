@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, escape, jsonify, flash, request, redirect, abort, g
 from flask.ext.uploads import UploadSet, IMAGES, TestingFileStorage, configure_uploads
-from flask.ext.login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin, AnonymousUser, confirm_login, fresh_login_required
+from flask.ext.login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin, AnonymousUserMixin, confirm_login, fresh_login_required
 from werkzeug import check_password_hash
 import os
 import libpgpy
